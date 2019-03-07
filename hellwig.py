@@ -33,38 +33,37 @@ class Hellwig:
         for n in N:
             n += 1
             tmp = self.n(N, n)
-            for i in range(len(tmp)):
-                output.append(list(tmp[i]))
+            for i in tmp:
+                output.append(list(i))
         return np.array(output)
 
     def CreateR0(self):
         tmp = np.zeros(self.N)
-        for i in range(self.N):
-            tmp[i] = sp.stats.pearsonr(self.Y, self.X[i])[0]
+        for i, x in enumerate(self.X):
+            tmp[i] = sp.stats.pearsonr(self.Y, x)[0]
         return tmp
 
 
     def CreateR(self):
         self.R = np.array
         tmp = np.zeros((self.N, self.N))
-        for i in range(self.N):
-            for j in range(self.N):
-                tmp[i][j] = sp.stats.pearsonr(self.X[i], self.X[j])[0]
+        for i, x1 in enumerate(self.X):
+            for j, x2 in enumerate(self.X):
+                tmp[i][j] = sp.stats.pearsonr(x1, x2)[0]
         return tmp
 
     def Createh(self):
         tmp = self.Combinations
         output = []
-        for i in range(len(tmp)):
+        for t in tmp:
             o = []
             mianownik = 0
-            for j in range(len(tmp[i])):
-                mianownik += np.absolute(self.R[tmp[i][0]][tmp[i][j]])
-            for j in range(len(tmp[i])):
-                o.append(self.R0[tmp[i][j]]**2/mianownik)
+            for j in t:
+                mianownik += np.absolute(self.R[t[0]][j])
+            for j in t:
+                o.append(self.R0[j]**2/mianownik)
             output.append(o)
         return np.array(output)
-
 
     def CreateH(self):
         tmp = []

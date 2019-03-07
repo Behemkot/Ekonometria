@@ -14,9 +14,10 @@ class Hellwig:
         self.R = self.CreateR()
         self.h = self.Createh()
         self.H = self.CreateH()
+        self.Answer = np.array(self.Combinations[np.argmax(self.H)])
 
     def __str__(self):
-        return str(np.array(self.Combinations[np.argmax(self.H)]) + 1)
+        return str(self.Answer)
 
 
     def n(self, arr, n):

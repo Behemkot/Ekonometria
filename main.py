@@ -7,6 +7,7 @@ if __name__ == "__main__":
     iris_data = datasets.load_iris()
     X = iris_data.data.tolist()
     Y = iris_data.target.tolist()
+    feature_names = iris_data.feature_names
     Combinations = []
 
     new_X = []
@@ -41,4 +42,9 @@ if __name__ == "__main__":
     print('')
     '''
 
-    print(Hel)
+    print("Variables: ", feature_names)
+    print("Doing Hellwig stuff...")
+    valid = []
+    for element in Hel.Answer:
+        valid.append(feature_names[int(element)])
+    print("Valid variables: ", valid)
